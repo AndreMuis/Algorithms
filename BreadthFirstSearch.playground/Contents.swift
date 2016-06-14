@@ -1,14 +1,8 @@
-//: Playground - noun: a place where people can play
-
-import UIKit
-
-
 //
-//   B - C - D
-//   |   |   |
-//   A   E - F - G
+// Breadth first search
 //
 
+import Foundation
 
 class Vertex
 {
@@ -26,6 +20,43 @@ class Vertex
     }
 }
 
+func markLevels(startVertex startVertex : Vertex)
+{
+    startVertex.level = 0
+    var level = 1
+
+    var frontier : [Vertex] = [Vertex]([startVertex])
+    var nextFrontier : [Vertex] = [Vertex]()
+
+    while(frontier.isEmpty == false)
+    {
+        for vertex : Vertex in frontier
+        {
+            for neighbor in vertex.neighbors
+            {
+                if neighbor.level == nil
+                {
+                    neighbor.parent = vertex
+                    neighbor.level = level
+                    nextFrontier.append(neighbor)
+                }
+            }
+        }
+
+        frontier = nextFrontier
+        nextFrontier.removeAll()
+
+        level = level + 1
+    }
+}
+
+
+//
+//   B - C - D
+//   |   |   |
+//   A   E - F - G
+//
+
 var aVertex = Vertex(name: "A")
 var bVertex = Vertex(name: "B")
 var cVertex = Vertex(name: "C")
@@ -42,36 +73,8 @@ eVertex.neighbors = [cVertex, dVertex, fVertex]
 fVertex.neighbors = [dVertex, eVertex, gVertex]
 gVertex.neighbors = [fVertex]
 
+markLevels(startVertex: cVertex)
 
-var level = 1
-
-var frontier : [Vertex] = [Vertex]()
-
-cVertex.level = 0
-frontier.append(cVertex)
-
-var nextFrontier : [Vertex] = [Vertex]()
-
-while(frontier.isEmpty == false)
-{
-    for vertex : Vertex in frontier
-    {
-        for var neighbor in vertex.neighbors
-        {
-            if neighbor.level == nil
-            {
-                neighbor.parent = vertex
-                neighbor.level = level
-                nextFrontier.append(neighbor)
-            }
-        }
-    }
-
-    frontier = nextFrontier
-    nextFrontier.removeAll()
-
-    level = level + 1
-}
 
 aVertex.level
 bVertex.level

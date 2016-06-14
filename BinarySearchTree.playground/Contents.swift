@@ -2,17 +2,6 @@
 
 import UIKit
 
-
-let count : Int = 10
-
-var numbers : [Int] = Array(count: count, repeatedValue: 0)
-
-for i : Int in 0...count - 1
-{
-    numbers[i] = Int(arc4random() % 100 + 1)
-}
-
-
 class Node
 {
     var leftNode : Node?
@@ -68,7 +57,17 @@ func findNodeWithSmallestValue(rootNode rootNode : Node) -> Node
 }
 
 
+let count : Int = 10
+
+var numbers : [Int] = Array(count: count, repeatedValue: 0)
+
+for i : Int in 0...count - 1
+{
+    numbers[i] = Int(arc4random() % 100 + 1)
+}
+
 numbers
+
 
 var rootNode = Node(value: numbers[0])
 
